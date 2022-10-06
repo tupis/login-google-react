@@ -1,35 +1,24 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import CustomButtom from "./components/CustomButtom";
+import "./App.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/privateRoute";
 
-interface userInfo {
-  email: "string";
-  name: "string";
-  given_name: "string";
-  picture: "string";
-}
+//Screens
+import Home from "./screens/home";
+import Login from "./screens/login";
+import Register from "./screens/register";
 
 function App() {
-  const [token, setToken] = useState<userInfo>();
-
-  const clientId = import.meta.env.VITE_CLIENT_ID_GOOGLE;
-
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
-
   return (
     <div className="App">
-      <GoogleOAuthProvider clientId={clientId}>
-        <CustomButtom setToken={setToken} />
-      </GoogleOAuthProvider>
-      {token && (
-        <>
-          <h2>Nome: {token.name}</h2>
-          <h3>Email: {token.email}</h3>
-        </>
-      )}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
