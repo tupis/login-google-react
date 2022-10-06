@@ -8,7 +8,7 @@ const CustomButtom = (props: any) => {
     onSuccess: async (response) => setToken(await LoginGoogle(response)),
   });
 
-  return <button onClick={() => login()}>Logar com o Google</button>;
+  return <button onClick={(): void => login()}>Continue com o Google</button>;
 };
 
 export default CustomButtom;
