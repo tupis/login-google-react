@@ -1,7 +1,7 @@
 import "../../sass/form.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { login } from "../../services/UsersServices";
+import { login, register } from "../../services/UsersServices";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
@@ -15,7 +15,7 @@ const Register = () => {
       email,
       password,
     };
-    await login(params);
+    await register(params);
   };
 
   return (
